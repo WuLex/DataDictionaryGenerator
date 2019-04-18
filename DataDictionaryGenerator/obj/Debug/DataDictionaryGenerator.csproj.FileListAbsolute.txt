@@ -1,0 +1,15 @@
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\DataDictionaryGenerator.exe.config
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\obj\Debug\DataDictionaryGenerator.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\obj\Debug\DataDictionaryGenerator.frmMain.resources
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\obj\Debug\DataDictionaryGenerator.Properties.Resources.resources
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\obj\Debug\DataDictionaryGenerator.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\DataDictionaryGenerator.exe
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\DataDictionaryGenerator.pdb
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\NPOI.dll
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\NPOI.OOXML.dll
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\NPOI.OpenXml4Net.dll
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\NPOI.OpenXmlFormats.dll
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\bin\Debug\NPOI.xml
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\obj\Debug\DataDictionaryGenerator.exe
+C:\Users\Administrator\Desktop\YueRepository-master\YueRepository-master\DataDictionaryGenerator\obj\Debug\DataDictionaryGenerator.pdb
