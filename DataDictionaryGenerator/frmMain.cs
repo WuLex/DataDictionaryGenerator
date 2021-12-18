@@ -15,10 +15,11 @@ using NPOI.OpenXmlFormats.Wordprocessing;
 using NPOI.XWPF.Extractor;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
+using CCWin;
 
 namespace DataDictionaryGenerator
 {
-    public partial class frmMain : Form
+    public partial class frmMain : CCSkinMain
     {
         #region 私有域
 
@@ -41,24 +42,27 @@ namespace DataDictionaryGenerator
         public ReturnMessage CheckCnnString(string cnnString)
         {
             ReturnMessage retMsg = new ReturnMessage(string.Empty, true);
-            SqlConnection cnn = new SqlConnection(cnnString);
-            try
+            using (SqlConnection cnn = new SqlConnection(cnnString))
             {
-                cnn.Open();
-            }
-            catch (Exception ex)
-            {
-                retMsg.isSuccess = false;
-                retMsg.Messages = ex.Message;
-                return retMsg;
-            }
-            finally
-            {
-                if (cnn.State == ConnectionState.Open)
+                try
                 {
-                    cnn.Close();
+                    cnn.Open();
                 }
-                cnn.Dispose();
+                catch (Exception ex)
+                {
+                    retMsg.isSuccess = false;
+                    retMsg.Messages = ex.Message;
+                    return retMsg;
+                }
+                finally
+                {
+                    if (cnn.State == ConnectionState.Open)
+                    {
+                        cnn.Close();
+                    }
+
+                    cnn.Dispose();
+                }
             }
             return retMsg;
         }
@@ -124,7 +128,7 @@ namespace DataDictionaryGenerator
                         r.GetCTR().AddNewRPr().AddNewRFonts().ascii = "宋体";
                         r.GetCTR().AddNewRPr().AddNewRFonts().eastAsia = "宋体";
                         r.GetCTR().AddNewRPr().AddNewRFonts().hint = ST_Hint.eastAsia;
-                        r.GetCTR().AddNewRPr().AddNewSz().val = (ulong)32;//3号字体;
+                        r.GetCTR().AddNewRPr().AddNewSz().val = (ulong)32; //3号字体;
                         r.GetCTR().AddNewRPr().AddNewSzCs().val = (ulong)32;
                         //设置行间距
                         //单倍为默认值（240twip）不需设置，1.5倍=240X1.5=360twip，2倍=240X2=480twip
@@ -139,37 +143,21 @@ namespace DataDictionaryGenerator
                         //标题行(固定)
                         //列宽
                         CT_TcPr mPr = table.GetRow(0).GetCell(0).GetCTTc().AddNewTcPr();
-                        mPr.tcW = new CT_TblWidth();
-                        mPr.tcW.w = "900";
-                        mPr.tcW.type = ST_TblWidth.dxa;
+                        mPr.tcW = new CT_TblWidth { w = "900", type = ST_TblWidth.dxa };
                         mPr = table.GetRow(0).GetCell(1).GetCTTc().AddNewTcPr();
-                        mPr.tcW = new CT_TblWidth();
-                        mPr.tcW.w = "1500";
-                        mPr.tcW.type = ST_TblWidth.dxa;
+                        mPr.tcW = new CT_TblWidth { w = "1500", type = ST_TblWidth.dxa };
                         mPr = table.GetRow(0).GetCell(2).GetCTTc().AddNewTcPr();
-                        mPr.tcW = new CT_TblWidth();
-                        mPr.tcW.w = "500";
-                        mPr.tcW.type = ST_TblWidth.dxa;
+                        mPr.tcW = new CT_TblWidth { w = "500", type = ST_TblWidth.dxa };
                         mPr = table.GetRow(0).GetCell(3).GetCTTc().AddNewTcPr();
-                        mPr.tcW = new CT_TblWidth();
-                        mPr.tcW.w = "1000";
-                        mPr.tcW.type = ST_TblWidth.dxa;
+                        mPr.tcW = new CT_TblWidth { w = "1000", type = ST_TblWidth.dxa };
                         mPr = table.GetRow(0).GetCell(4).GetCTTc().AddNewTcPr();
-                        mPr.tcW = new CT_TblWidth();
-                        mPr.tcW.w = "500";
-                        mPr.tcW.type = ST_TblWidth.dxa;
+                        mPr.tcW = new CT_TblWidth { w = "500", type = ST_TblWidth.dxa };
                         mPr = table.GetRow(0).GetCell(6).GetCTTc().AddNewTcPr();
-                        mPr.tcW = new CT_TblWidth();
-                        mPr.tcW.w = "900";
-                        mPr.tcW.type = ST_TblWidth.dxa;
+                        mPr.tcW = new CT_TblWidth { w = "900", type = ST_TblWidth.dxa };
                         mPr = table.GetRow(0).GetCell(7).GetCTTc().AddNewTcPr();
-                        mPr.tcW = new CT_TblWidth();
-                        mPr.tcW.w = "800";
-                        mPr.tcW.type = ST_TblWidth.dxa;
+                        mPr.tcW = new CT_TblWidth { w = "800", type = ST_TblWidth.dxa };
                         mPr = table.GetRow(0).GetCell(8).GetCTTc().AddNewTcPr();
-                        mPr.tcW = new CT_TblWidth();
-                        mPr.tcW.w = "1500";
-                        mPr.tcW.type = ST_TblWidth.dxa;
+                        mPr.tcW = new CT_TblWidth { w = "1500", type = ST_TblWidth.dxa };
                         //填充文字
                         table.GetRow(0).GetCell(0).SetText("字段序号");
                         table.GetRow(0).GetCell(1).SetText("字段名");
@@ -212,12 +200,14 @@ namespace DataDictionaryGenerator
                         }
                     }
                 }
+
                 //输出保存
                 string docAllPath = Application.StartupPath + "\\SqlDBDicFile.docx";
                 if (File.Exists(docAllPath))
                 {
                     File.Delete(docAllPath);
                 }
+
                 fs = File.OpenWrite(docAllPath);
                 doc.Write(fs);
                 doc.Close();
@@ -231,10 +221,12 @@ namespace DataDictionaryGenerator
             }
             finally
             {
-                fs.Close();
-                fs.Dispose();
+                if (fs != null)
+                {
+                    fs.Close();
+                    fs.Dispose();
+                }
             }
-
         }
 
         #endregion
@@ -247,27 +239,31 @@ namespace DataDictionaryGenerator
             this.Cursor = Cursors.WaitCursor;
 
             ReturnMessage retMsg = CheckCnnString(txtCnnString.Text.Trim());
+
+            
             if (!retMsg.isSuccess)
             {
-                MessageBox.Show("数据库连接字符串错误，信息为：" + retMsg.Messages);
+                MessageBoxEx.Show("数据库连接字符串错误，信息为：" + retMsg.Messages, "", MessageBoxButtons.OK);
                 this.Cursor = currCursor;
                 return;
             }
+
             retMsg = GetInfo(txtCnnString.Text.Trim());
             if (!retMsg.isSuccess)
             {
-                MessageBox.Show("读取数据库表结构错误，信息为：" + retMsg.Messages);
+                MessageBoxEx.Show("读取数据库表结构错误，信息为：" + retMsg.Messages,"", MessageBoxButtons.OK);
                 this.Cursor = currCursor;
                 return;
             }
+
             retMsg = WriteDoc();
             if (retMsg.isSuccess)
             {
-                MessageBox.Show("文档生成成功!\n请在程序根目录查找文档!");
+                MessageBoxEx.Show("文档生成成功!\n请在程序根目录查找文档!","", MessageBoxButtons.OK);
             }
             else
             {
-                MessageBox.Show("文档生成失败，信息为：" + retMsg.Messages);
+                MessageBoxEx.Show("文档生成失败，信息为：" + retMsg.Messages,"", MessageBoxButtons.OK);
             }
 
             this.Cursor = currCursor;
