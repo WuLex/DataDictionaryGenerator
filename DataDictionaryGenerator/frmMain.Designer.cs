@@ -117,7 +117,7 @@
             this.btnBulid.ControlState = CCWin.SkinClass.ControlState.Normal;
             this.btnBulid.DownBack = null;
             this.btnBulid.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnBulid.ForeColor = System.Drawing.Color.OrangeRed;
+            this.btnBulid.ForeColor = System.Drawing.Color.White;
             this.btnBulid.Location = new System.Drawing.Point(1000, 53);
             this.btnBulid.MouseBack = null;
             this.btnBulid.Name = "btnBulid";

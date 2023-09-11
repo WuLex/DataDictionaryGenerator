@@ -259,7 +259,7 @@ namespace DataDictionaryGenerator
             retMsg = WriteDoc();
             if (retMsg.isSuccess)
             {
-                MessageBoxEx.Show("文档生成成功!\n请在程序根目录查找文档!","", MessageBoxButtons.OK);
+                MessageBoxEx.Show("文档生成成功!\n请在程序Bin目录查找文档!","", MessageBoxButtons.OK);
             }
             else
             {
